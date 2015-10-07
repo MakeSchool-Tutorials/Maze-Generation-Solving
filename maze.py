@@ -68,8 +68,7 @@ class Maze:
                     if not (self.maze_array[new_cell] & WALL_BITS):
                         neighbors.append((new_cell, i))
                 elif self.state == 'solve':
-                    directions = self.maze_array[cell] & WALL_BITS
-                    if (directions & WALLS[i]) > 0:
+                    if (self.maze_array[cell] & WALLS[i]):
                         if not (self.maze_array[new_cell] &
                                 (BACKTRACK_BITS | SOLUTION_BITS)):
                             neighbors.append((new_cell, i))
@@ -233,6 +232,8 @@ class Maze:
         pygame.draw.rect(self.s_layer, PURPLE, pygame.Rect(
                          SCREEN_SIZE[0] - CELL_SIZE, SCREEN_SIZE[1] -
                          CELL_SIZE, CELL_SIZE, CELL_SIZE))
+
+        self.refresh_maze_view()
 
 
 def check_for_exit():
